@@ -42,20 +42,51 @@ def prompt(question, task):
     return f"{task}\n\nProblem: {question}\n\n{FORMAT}"
 
 
+def initial_prompts(question):
+    return [
+        prompt(question, "Solve independently using a direct calculation."),
+        prompt(question, "Solve independently using an alternate approach and check your arithmetic."),
+    ]
+
+
+def exchange_prompts(question, previous):
+    return [
+        prompt(question,
+               f"Review both prior solutions, then independently revise your answer.\n"
+               f"Your prior solution:\n{previous[agent]}\n\n"
+               f"Other solver's prior solution:\n{previous[1 - agent]}")
+        for agent in range(2)
+    ]
+
+
 def solve_debate(question, generate, initial):
     """Extend the initial pair by five simultaneous exchanges."""
     turns = [initial]
     for _ in range(ROUNDS):
-        previous = turns[-1]
-        prompts = [
-            prompt(question,
-                   f"Review both prior solutions, then independently revise your answer.\n"
-                   f"Your prior solution:\n{previous[agent]}\n\n"
-                   f"Other solver's prior solution:\n{previous[1 - agent]}")
-            for agent in range(2)
-        ]
-        turns.append(generate(prompts))
+        turns.append(generate(exchange_prompts(question, turns[-1])))
     return turns
+
+
+def evaluate_group(items, generate):
+    """Process each round for a group while keeping question transcripts separate."""
+    started = perf_counter()
+    transcripts = [[] for _ in items]
+    for round_index in range(ROUNDS + 1):
+        prompts = []
+        for (question, _), turns in zip(items, transcripts):
+            prompts.extend(exchange_prompts(question, turns[-1]) if round_index
+                           else initial_prompts(question))
+        replies = generate(prompts)
+        if len(replies) != len(prompts):
+            raise ValueError("Expected one model response per prompt.")
+        for index, turns in enumerate(transcripts):
+            turns.append(replies[2 * index:2 * index + 2])
+    elapsed = perf_counter() - started
+    return [
+        score(expected, turns[0][0], turns, [reply for pair in turns for reply in pair],
+              ROUNDS + 1 if index == 0 else 0, elapsed if index == 0 else 0)
+        for index, ((_, expected), turns) in enumerate(zip(items, transcripts))
+    ]
 
 
 def evaluate(question, expected, generate, debate=solve_debate):
@@ -73,13 +104,13 @@ def evaluate(question, expected, generate, debate=solve_debate):
         completions.extend(responses)
         return responses
 
-    initial = batch([
-        prompt(question, "Solve independently using a direct calculation."),
-        prompt(question, "Solve independently using an alternate approach and check your arithmetic."),
-    ])
-    baseline = initial[0]
-    baseline_answer = final_answer(baseline)
+    initial = batch(initial_prompts(question))
     turns = debate(question, batch, initial)
+    return score(expected, initial[0], turns, completions, batches, perf_counter() - started)
+
+
+def score(expected, baseline, turns, completions, batches, elapsed):
+    baseline_answer = final_answer(baseline)
     answers = [[final_answer(response) for response in pair] for pair in turns]
     agreements = [a is not None and a == b for a, b in answers]
     final = answers[-1][0] if agreements[-1] else None
@@ -104,7 +135,7 @@ def evaluate(question, expected, generate, debate=solve_debate):
         "generation_batches": batches,
         "parse_failed_completions": sum(final_answer(response) is None for response in completions),
         "empty_completions": sum(not response.strip() for response in completions),
-        "elapsed_seconds": perf_counter() - started,
+        "elapsed_seconds": elapsed,
     }
 
 
@@ -187,6 +218,7 @@ def main(debate=solve_debate, variant="base"):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--limit", type=int, default=25)
     parser.add_argument("--output", type=Path, default=Path("results/pilot"))
+    parser.add_argument("--question-batch-size", type=int, default=1)
     parser.add_argument("--max-tokens", type=int, default=512)
     parser.add_argument("--precision", choices=("auto", "float32", "float16", "bfloat16"), default="auto")
     parser.add_argument("--model-revision")
@@ -195,6 +227,10 @@ def main(debate=solve_debate, variant="base"):
     ids = json.loads(Path(__file__).with_name("question_ids.json").read_text(encoding="utf-8"))
     if not 1 <= args.limit <= len(ids) or args.max_tokens < 1:
         parser.error(f"Use a limit between 1 and {len(ids)} and a positive token limit.")
+    if args.question_batch_size < 1:
+        parser.error("The question batch size must be positive.")
+    if args.question_batch_size > 1 and debate is not solve_debate:
+        parser.error("Cross-question batching currently supports the base debate only.")
     ids = ids[:args.limit]
     args.output.mkdir(parents=True, exist_ok=True)
     manifest = args.output / "run.json"
@@ -214,7 +250,8 @@ def main(debate=solve_debate, variant="base"):
         "exchange_rounds": ROUNDS,
         "precision": args.precision,
         "variant": variant,
-        "protocol_version": 2,
+        "protocol_version": 3,
+        "question_batch_size": args.question_batch_size,
     }
     if previous is not None and previous != config:
         parser.error("This output directory has a different run configuration. Choose another.")
@@ -224,20 +261,33 @@ def main(debate=solve_debate, variant="base"):
     rows = []
     generate = None
     dataset = None
-    for index in ids:
-        path = args.output / f"gsm8k-{index:04d}.json"
+    size = args.question_batch_size
+    for offset in range(0, len(ids), size):
+        group = ids[offset:offset + size]
+        filename = f"gsm8k-{group[0]:04d}.json" if size == 1 else f"batch-{offset:04d}.json"
+        path = args.output / filename
         if path.exists():
-            row = json.loads(path.read_text(encoding="utf-8"))
+            checkpoint = json.loads(path.read_text(encoding="utf-8"))
+            group_rows = [checkpoint] if size == 1 else checkpoint
         else:
             if generate is None:
                 dataset = load_dataset(DATASET, "main", split="test", revision=config["dataset_revision"])
                 generate = load_generator(config["model_revision"], args.max_tokens, args.precision)
-            item = dataset[index]
-            expected = str(number(item["answer"].rsplit("####", 1)[1].strip()))
-            row = {"question_id": index, "question": item["question"],
-                   **evaluate(item["question"], expected, generate, debate=debate)}
-            write_json(path, row)
-        rows.append(row)
+            items = []
+            for index in group:
+                item = dataset[index]
+                expected = str(number(item["answer"].rsplit("####", 1)[1].strip()))
+                items.append((item["question"], expected))
+            if size == 1:
+                outcomes = [evaluate(*items[0], generate, debate=debate)]
+            else:
+                outcomes = evaluate_group(items, generate)
+            group_rows = [
+                {"question_id": index, "question": question, **outcome}
+                for index, (question, _), outcome in zip(group, items, outcomes)
+            ]
+            write_json(path, group_rows[0] if size == 1 else group_rows)
+        rows.extend(group_rows)
         print(f"{len(rows)}/{len(ids)} saved", flush=True)
     summary = summarize(rows)
     summary["last_session_seconds"] = perf_counter() - started

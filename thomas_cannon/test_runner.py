@@ -47,6 +47,24 @@ class RunnerTests(unittest.TestCase):
         self.assertTrue(row["debate_correct"])
         self.assertEqual(row["first_agreement_round"], 0)
 
+    def test_cross_question_batch_matches_individual_scoring(self):
+        items = [("Question A", "2"), ("Question B", "3")]
+        batch_sizes = []
+
+        def generate(prompts):
+            batch_sizes.append(len(prompts))
+            return ["FINAL: 2" if "Problem: Question A" in prompt else "FINAL: 3"
+                    for prompt in prompts]
+
+        grouped = runner.evaluate_group(items, generate)
+        self.assertEqual(batch_sizes, [4] * 6)
+        individual = [runner.evaluate(question, answer, generate) for question, answer in items]
+        for actual, expected in zip(grouped, individual):
+            for key in expected.keys() - {"generation_batches", "elapsed_seconds"}:
+                self.assertEqual(actual[key], expected[key], key)
+        self.assertEqual(runner.summarize(grouped)["generation_batches"], 6)
+        self.assertEqual(runner.summarize(grouped)["total_model_calls"], 24)
+
     def test_outcomes_and_exact_mcnemar(self):
         def run(final_pair, first="FINAL: 2"):
             batches = iter([[first, "FINAL: 3"]] + [["FINAL: 2"] * 2] * 4 + [final_pair])

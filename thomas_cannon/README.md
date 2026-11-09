@@ -35,3 +35,26 @@ A variant can call `runner.main(debate=my_debate, variant="my-variant")`. The fu
 - [GSM8K dataset card](https://huggingface.co/datasets/openai/gsm8k)
 
 The runner records actual outputs when executed. Benchmark results are pending.
+
+## Colab batch pilot
+
+Open `colab_pilot.ipynb` and select a GPU runtime. Use a fresh software ZIP
+from the commit you are testing. The notebook runs the files from that ZIP and
+prints progress in the output cell. Allow Drive mounting for a dedicated output
+folder that survives runtime loss. Keep one notebook tab open while running.
+
+Start with four questions per group (eight prompts per generation batch):
+
+```bash
+python -u runner.py --limit 25 --question-batch-size 4 --output results/pilot-batched
+```
+
+For the base debate, cross-question batching still performs all five exchanges.
+Each group is saved as one checkpoint with a row for each question. On restart,
+completed groups are skipped and any interrupted group is rerun. Keep the same
+batch size when resuming. Use a fresh output folder when changing batch size,
+model revisions, precision or the token cap. Check the printed GPU and precision
+and compare seconds per question and parse failure rates before increasing size.
+The loader prints the precision it actually uses. Colab may show dependency
+warnings for unrelated preinstalled packages. Check that the runner imports and
+the tests pass before proceeding.
