@@ -9,7 +9,11 @@ from fractions import Fraction
 from pathlib import Path
 
 MODEL = "Qwen/Qwen2.5-3B-Instruct"
+MODEL_REVISION = "aa8e72537993ba99e69dfaafa59ed015b17504d1"
 DATASET = "openai/gsm8k"
+DATASET_REVISION = "740312add88f781978c0658806c59bc2815b9866"
+TEAM_PRECISION = "float16"
+TEAM_BATCH_SIZE = 4
 ROUNDS = 5
 FORMAT = "Explain your reasoning briefly. End with a separate line: FINAL: <number>"
 NUMBER = r"[+-]?\$?\s*(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?(?:\s*/\s*\d+)?"
@@ -59,33 +63,79 @@ def exchange_prompts(question, previous):
     ]
 
 
-def solve_debate(question, generate, initial):
-    """Extend the initial pair by five simultaneous exchanges."""
+def debate_steps(question, initial):
+    """Yield the prompts for each exchange and return the answer transcript."""
     turns = [initial]
     for _ in range(ROUNDS):
-        turns.append(generate(exchange_prompts(question, turns[-1])))
+        replies = yield exchange_prompts(question, turns[-1])
+        turns.append(replies)
     return turns
 
 
-def evaluate_group(items, generate):
-    """Process each round for a group while keeping question transcripts separate."""
+def solve_debate(question, generate, initial):
+    """Run the base exchange steps using the single-question interface."""
+    steps = debate_steps(question, initial)
+    try:
+        prompts = next(steps)
+        while True:
+            prompts = steps.send(generate(prompts))
+    except StopIteration as finished:
+        return finished.value
+
+
+def generate_batch(generate, prompts):
+    responses = generate(prompts)
+    if len(responses) != len(prompts):
+        raise ValueError("Expected one model response per prompt.")
+    return responses
+
+
+def evaluate_group(items, generate, steps=debate_steps):
+    """Batch the next requests from active questions and route their replies."""
     started = perf_counter()
-    transcripts = [[] for _ in items]
-    for round_index in range(ROUNDS + 1):
+    initial = generate_batch(generate, [
+        text for question, _ in items for text in initial_prompts(question)
+    ])
+    completions = [initial[i:i + 2] for i in range(0, len(initial), 2)]
+    active = [
+        (index, steps(question, pair.copy()), None)
+        for index, ((question, _), pair) in enumerate(zip(items, completions))
+    ]
+    transcripts = {}
+    batches = 1
+    while active:
+        requests = []
         prompts = []
-        for (question, _), turns in zip(items, transcripts):
-            prompts.extend(exchange_prompts(question, turns[-1]) if round_index
-                           else initial_prompts(question))
-        replies = generate(prompts)
-        if len(replies) != len(prompts):
-            raise ValueError("Expected one model response per prompt.")
-        for index, turns in enumerate(transcripts):
-            turns.append(replies[2 * index:2 * index + 2])
+        for index, session, replies in active:
+            try:
+                request = session.send(replies)
+            except StopIteration as finished:
+                turns = finished.value
+                if not turns or any(len(pair) != 2 for pair in turns):
+                    raise ValueError("A debate must return at least one pair of agent answers.")
+                transcripts[index] = turns
+                continue
+            if not isinstance(request, (list, tuple)) or not request or not all(
+                isinstance(text, str) for text in request
+            ):
+                raise ValueError("A debate step must yield a nonempty list of prompts.")
+            requests.append((index, session, len(prompts), len(request)))
+            prompts.extend(request)
+        if not requests:
+            break
+        responses = generate_batch(generate, prompts)
+        batches += 1
+        active = []
+        for index, session, offset, count in requests:
+            replies = responses[offset:offset + count]
+            completions[index].extend(replies)
+            active.append((index, session, replies))
+
     elapsed = perf_counter() - started
     return [
-        score(expected, turns[0][0], turns, [reply for pair in turns for reply in pair],
-              ROUNDS + 1 if index == 0 else 0, elapsed if index == 0 else 0)
-        for index, ((_, expected), turns) in enumerate(zip(items, transcripts))
+        score(expected, completions[index][0], transcripts[index], completions[index],
+              batches if index == 0 else 0, elapsed if index == 0 else 0)
+        for index, (_, expected) in enumerate(items)
     ]
 
 
@@ -97,9 +147,7 @@ def evaluate(question, expected, generate, debate=solve_debate):
 
     def batch(prompts):
         nonlocal batches
-        responses = generate(prompts)
-        if len(responses) != len(prompts):
-            raise ValueError("Expected one model response per prompt.")
+        responses = generate_batch(generate, prompts)
         batches += 1
         completions.extend(responses)
         return responses
@@ -133,7 +181,8 @@ def score(expected, baseline, turns, completions, batches, elapsed):
         "debate_calls": len(completions),
         "unique_model_completions": len(completions),
         "generation_batches": batches,
-        "parse_failed_completions": sum(final_answer(response) is None for response in completions),
+        "answer_completions": sum(map(len, answers)),
+        "parse_failed_completions": sum(answer is None for pair in answers for answer in pair),
         "empty_completions": sum(not response.strip() for response in completions),
         "elapsed_seconds": elapsed,
     }
@@ -156,6 +205,7 @@ def summarize(rows):
     discordant = baseline_only + debate_only
     tail = sum(comb(discordant, k) for k in range(min(baseline_only, debate_only) + 1))
     completions = sum(row["unique_model_completions"] for row in rows)
+    answer_completions = sum(row.get("answer_completions", row["unique_model_completions"]) for row in rows)
     return {
         "questions": count,
         "mcnemar_exact": {
@@ -177,7 +227,7 @@ def summarize(rows):
         "baseline_parse_failure_rate_pct": 100 * sum(row["baseline_parse_failure"] for row in rows) / count,
         "debate_final_parse_failure_rate_pct": 100 * sum(row["debate_final_parse_failure"] for row in rows) / count,
         "debate_final_disagreement_rate_pct": 100 * sum(row["debate_final_disagreement"] for row in rows) / count,
-        "completion_parse_failure_rate_pct": 100 * sum(row["parse_failed_completions"] for row in rows) / completions,
+        "completion_parse_failure_rate_pct": 100 * sum(row["parse_failed_completions"] for row in rows) / answer_completions,
         "empty_completions": sum(row["empty_completions"] for row in rows),
         "evaluation_seconds": sum(row["elapsed_seconds"] for row in rows),
     }
@@ -213,44 +263,46 @@ def load_generator(revision, max_tokens, precision):
     return generate
 
 
-def main(debate=solve_debate, variant="base"):
+def main(debate=None, variant="base", *, steps=None):
+    if debate is not None and steps is not None:
+        raise ValueError("Choose either debate or steps.")
+    if debate is None:
+        steps = steps or debate_steps
     started = perf_counter()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--limit", type=int, default=25)
     parser.add_argument("--output", type=Path, default=Path("results/pilot"))
-    parser.add_argument("--question-batch-size", type=int, default=1)
+    parser.add_argument("--question-batch-size", type=int, default=1 if debate is not None else TEAM_BATCH_SIZE)
     parser.add_argument("--max-tokens", type=int, default=512)
-    parser.add_argument("--precision", choices=("auto", "float32", "float16", "bfloat16"), default="auto")
-    parser.add_argument("--model-revision")
-    parser.add_argument("--dataset-revision")
+    parser.add_argument("--precision", choices=("auto", "float32", "float16", "bfloat16"), default=TEAM_PRECISION)
+    parser.add_argument("--model-revision", default=MODEL_REVISION)
+    parser.add_argument("--dataset-revision", default=DATASET_REVISION)
     args = parser.parse_args()
     ids = json.loads(Path(__file__).with_name("question_ids.json").read_text(encoding="utf-8"))
     if not 1 <= args.limit <= len(ids) or args.max_tokens < 1:
         parser.error(f"Use a limit between 1 and {len(ids)} and a positive token limit.")
     if args.question_batch_size < 1:
         parser.error("The question batch size must be positive.")
-    if args.question_batch_size > 1 and debate is not solve_debate:
-        parser.error("Cross-question batching currently supports the base debate only.")
+    if args.question_batch_size > 1 and debate is not None:
+        parser.error("Use steps= for cross-question batching with a variant.")
     ids = ids[:args.limit]
     args.output.mkdir(parents=True, exist_ok=True)
     manifest = args.output / "run.json"
 
     from datasets import load_dataset
-    from huggingface_hub import HfApi
 
     previous = json.loads(manifest.read_text(encoding="utf-8")) if manifest.exists() else None
-    api = HfApi()
     config = {
         "model": MODEL,
-        "model_revision": args.model_revision or (previous["model_revision"] if previous else api.model_info(MODEL).sha),
+        "model_revision": args.model_revision,
         "dataset": DATASET,
-        "dataset_revision": args.dataset_revision or (previous["dataset_revision"] if previous else api.dataset_info(DATASET).sha),
+        "dataset_revision": args.dataset_revision,
         "question_ids": ids,
         "max_tokens": args.max_tokens,
-        "exchange_rounds": ROUNDS,
+        "base_exchange_rounds": ROUNDS,
         "precision": args.precision,
         "variant": variant,
-        "protocol_version": 3,
+        "protocol_version": 4,
         "question_batch_size": args.question_batch_size,
     }
     if previous is not None and previous != config:
@@ -278,10 +330,10 @@ def main(debate=solve_debate, variant="base"):
                 item = dataset[index]
                 expected = str(number(item["answer"].rsplit("####", 1)[1].strip()))
                 items.append((item["question"], expected))
-            if size == 1:
+            if debate is not None:
                 outcomes = [evaluate(*items[0], generate, debate=debate)]
             else:
-                outcomes = evaluate_group(items, generate)
+                outcomes = evaluate_group(items, generate, steps=steps)
             group_rows = [
                 {"question_id": index, "question": question, **outcome}
                 for index, (question, _), outcome in zip(group, items, outcomes)

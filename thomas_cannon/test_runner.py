@@ -65,6 +65,35 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(runner.summarize(grouped)["generation_batches"], 6)
         self.assertEqual(runner.summarize(grouped)["total_model_calls"], 24)
 
+    def test_variant_routes_extra_calls_and_early_stop(self):
+        sizes = []
+
+        def variant(question, initial):
+            if question == "A":
+                return [initial]
+            critique, = yield [question + " critique"]
+            assert critique == "B critique"
+            final = yield [question + " first", question + " second"]
+            return [initial, final]
+
+        def generate(prompts):
+            sizes.append(len(prompts))
+            if len(sizes) == 1:
+                return ["FINAL: 2"] * 4
+            if len(sizes) == 2:
+                self.assertEqual(prompts, ["B critique"])
+                return prompts
+            self.assertEqual(prompts, ["B first", "B second"])
+            return ["FINAL: 3"] * 2
+
+        early, revised = runner.evaluate_group([("A", "2"), ("B", "3")], generate, variant)
+        self.assertEqual(sizes, [4, 1, 2])
+        self.assertEqual(early["debate_calls"], 2)
+        self.assertEqual(revised["debate_calls"], 5)
+        self.assertEqual(revised["answer_completions"], 4)
+        self.assertEqual(revised["parse_failed_completions"], 0)
+        self.assertTrue(early["debate_correct"] and revised["debate_correct"])
+
     def test_outcomes_and_exact_mcnemar(self):
         def run(final_pair, first="FINAL: 2"):
             batches = iter([[first, "FINAL: 3"]] + [["FINAL: 2"] * 2] * 4 + [final_pair])
@@ -90,13 +119,10 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(summary["unresolved_rate_pct"], 50)
 
     def test_resume_skips_completed_question(self):
-        api = SimpleNamespace(model_info=lambda _: SimpleNamespace(sha="model-test"),
-                              dataset_info=lambda _: SimpleNamespace(sha="dataset-test"))
         sources = {
             "datasets": SimpleNamespace(load_dataset=lambda *a, **k: [
                 {"question": "1+1?", "answer": "#### 2"}
             ] * 1319),
-            "huggingface_hub": SimpleNamespace(HfApi=lambda: api),
         }
         batches = 0
 
@@ -108,7 +134,7 @@ class RunnerTests(unittest.TestCase):
             return ["FINAL: 2"] * len(prompts)
 
         with tempfile.TemporaryDirectory() as directory:
-            argv = ["runner.py", "--limit", "2", "--output", directory]
+            argv = ["runner.py", "--limit", "2", "--question-batch-size", "1", "--output", directory]
             with (patch.dict(sys.modules, sources), patch.object(sys, "argv", argv),
                   patch.object(runner, "load_generator", return_value=generate),
                   contextlib.redirect_stdout(io.StringIO())):

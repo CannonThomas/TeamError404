@@ -10,9 +10,9 @@ python runner.py --limit 25 --output results/pilot-v2
 
 For Colab, mount Drive and set `--output` to a folder on Drive so results survive a reset. Repeat the same command and output path to resume. The runner saves one JSON file per completed question and a summary after all requested questions finish. Use one process per output folder. A question interrupted mid-run will be rerun. Call counts cover completed questions.
 
-Check `summary.json` for session time, cumulative evaluation time, parse failure rates, and empty outputs before expanding the run. Inspect the saved responses when answers are missing or garbled. On GPUs with native bfloat16 support, automatic precision uses bfloat16. On older GPUs it uses float16. If float16 outputs are garbled, retry with `--precision float32` in a new output directory, provided the GPU has enough memory. Keep device and precision consistent when resuming or comparing variants.
+Check `summary.json` for session time, cumulative evaluation time, parse failure rates, and empty outputs before expanding the run. Inspect the saved responses when answers are missing or garbled. The shared settings are Qwen2.5-3B-Instruct and GSM8K pinned to the pilot revisions, the existing ordered test IDs, float16, four questions per batch, and a 512-token cap. Use the same settings for all reported variants. On a CPU, use `--precision float32` for a separate diagnostic run. Use a new output directory for each protocol or variant.
 
-For the full experiment, run `python runner.py --limit 200 --output results/full`. Keep the same model, model revision, dataset revision, ordered question IDs, and token limit across variants. The manifest records those settings. Share it with the team before collecting full results. Use `--model-revision` and `--dataset-revision` with the commit hashes in the manifest to pin new runs to those revisions.
+For the full experiment, run `python runner.py --limit 200 --output results/full`.
 
 ## Protocol
 
@@ -21,13 +21,32 @@ For the full experiment, run `python runner.py --limit 200 --output results/full
 - Each of five exchanges uses both responses from the previous turn, so neither agent sees the other agent's update from the current round.
 - Round 0 means the initial answers already agreed. The runner completes all five rounds, even after agreement. Mean time to first agreement is calculated over questions that agree at least once.
 - The final round determines correctness. Missing or unparsable final answers and different numeric answers are unresolved and scored as failures. The summary separates these causes. Percent signs are stripped when comparing numeric magnitudes against GSM8K’s unitless answer keys. Wrong agreement and unresolved rates use all evaluated questions as the denominator.
-- The baseline uses one completion that is also counted among the 12 debate completions. The combined total counts it once. Each question uses six generation batches. The pilot uses 300 completions across 150 batches, and the full run uses 2,400 completions across 1,200 batches.
+- The baseline uses one completion that is also counted among the 12 debate completions. The combined total counts it once. Each group runs six generation batches for the base model. At batch size four the pilot uses 300 completions across 42 batches, and the full run uses 2,400 completions across 300 batches.
 - The exact two-sided McNemar test uses paired baseline-only and debate-only correct counts. Both modes score missing answers as incorrect.
 ## Standalone software archives
 
 Each teammate’s individual software archive should include its own copy of `runner.py`, `question_ids.json`, `requirements.txt`, and its own setup instructions and variant files. Extract each archive into a separate folder and run it there. Imports from sibling team folders will break when a grader extracts an individual archive.
 
-A variant can call `runner.main(debate=my_debate, variant="my-variant")`. The function receives `(question, generate, initial)`, where `generate` takes a list of prompts and returns a list of responses. Return a transcript starting with `initial` and followed by response pairs. Record each variant’s differences and exact run command in its README.
+### Adding a variant
+
+Put your variant in its own Python file and pass a generator function to the shared runner. The runner supplies the question and two initial answers. Yield a list of ready prompts, receive the replies in the same order, and return the list of answer pairs. Add a pair for each completed exchange. Extra critique calls count toward compute but their replies belong outside the answer transcript unless they also contain an agent's final answer. Early stopping returns the pairs collected so far.
+
+```python
+from runner import exchange_prompts, main
+
+def my_steps(question, initial):
+    turns = [initial]
+    for _ in range(5):
+        replies = yield exchange_prompts(question, turns[-1])
+        turns.append(replies)
+    return turns
+
+if __name__ == "__main__":
+    main(steps=my_steps, variant="my-variant")
+```
+
+Replace the example exchange with your variant's logic. A synchronous variant can still use `main(debate=...)` for single-question debugging. For the team comparison, use the batched interface and record the shared settings. Padding and float16 can change greedy responses when batch shapes differ, so rerun the base with the same settings and report any differences in batch shape or hardware. The pilot had one baseline answer reach the token cap without a final answer. If the team changes prompts or the token cap, apply that decision across variants and rerun the baseline.
+
 
 ## Sources
 
@@ -49,7 +68,7 @@ Start with four questions per group (eight prompts per generation batch):
 python -u runner.py --limit 25 --question-batch-size 4 --output results/pilot-batched
 ```
 
-For the base debate, cross-question batching still performs all five exchanges.
+The base debate performs all five exchanges. Variants using `steps=` share the same batching and checkpointing code.
 Each group is saved as one checkpoint with a row for each question. On restart,
 completed groups are skipped and any interrupted group is rerun. Keep the same
 batch size when resuming. Use a fresh output folder when changing batch size,
