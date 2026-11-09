@@ -1,0 +1,4 @@
+torch>=2.4,<3
+transformers>=4.51,<5
+datasets>=3,<5
+huggingface-hub>=0.30,<1
