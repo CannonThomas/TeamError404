@@ -1,0 +1,298 @@
+[
+  {
+    "question_id": 366,
+    "question": "To be promoted to the next school year, Jane takes 3 tests that together must total at least 42 points. On her first test, Jane scored 15 points, on the second test she scored 18 points. What is the minimum number of points she must score on the third test to pass?",
+    "expected": "9",
+    "baseline_response": "To solve this problem, we need to determine the minimum score Jane needs on her third test to meet the requirement of scoring at least 42 points across all three tests.\n\nFirst, let's add up the scores from the first two tests:\n- First test score: 15 points\n- Second test score: 18 points\n\nAdding these together:\n\\[ 15 + 18 = 33 \\]\n\nJane needs a total of at least 42 points over the three tests. Therefore, we need to find out how many more points she needs after scoring 33 points:\n\\[ 42 - 33 = 9 \\]\n\nThus, Jane must score at least 9 points on her third test to reach the required total of 42 points.\n\nFINAL: 9",
+    "baseline_answer": "9",
+    "baseline_correct": true,
+    "debate_responses": [
+      [
+        "To solve this problem, we need to determine the minimum score Jane needs on her third test to meet the requirement of scoring at least 42 points across all three tests.\n\nFirst, let's add up the scores from the first two tests:\n- First test score: 15 points\n- Second test score: 18 points\n\nAdding these together:\n\\[ 15 + 18 = 33 \\]\n\nJane needs a total of at least 42 points over the three tests. Therefore, we need to find out how many more points she needs after scoring 33 points:\n\\[ 42 - 33 = 9 \\]\n\nThus, Jane must score at least 9 points on her third test to reach the required total of 42 points.\n\nFINAL: 9",
+        "To solve this problem, we need to determine the minimum score Jane needs on her third test to meet the requirement of scoring at least 42 points across all three tests.\n\nFirst, let's denote the scores on the three tests as follows:\n- First test: \\( T_1 = 15 \\) points\n- Second test: \\( T_2 = 18 \\) points\n- Third test: \\( T_3 \\) points\n\nThe total score from all three tests must be at least 42 points:\n\\[ T_1 + T_2 + T_3 \\geq 42 \\]\n\nSubstitute the known values for \\( T_1 \\) and \\( T_2 \\):\n\\[ 15 + 18 + T_3 \\geq 42 \\]\n\nCombine the known scores:\n\\[ 33 + T_3 \\geq 42 \\]\n\nTo isolate \\( T_3 \\), subtract 33 from both sides of the inequality:\n\\[ T_3 \\geq 9 \\]\n\nTherefore, Jane must score at least 9 points on her third test to pass.\n\nFINAL: 9"
+      ],
+      [
+        "Both prior solutions correctly approach the problem by setting up an equation based on the total points needed and the points already achieved. They both arrive at the same conclusion that Jane needs to score at least 9 points on her third test to meet the requirement of at least 42 points across all three tests.\n\nLet's break down the reasoning:\n\n1. **Total Points Requirement**: Jane needs a total of at least 42 points across all three tests.\n2. **Points Achieved So Far**: She has scored 15 points on the first test and 18 points on the second test.\n3. **Remaining Points Needed**: Calculate the remaining points needed by subtracting the points she has already scored from the total required:\n   \\[ 42 - (15 + 18) = 42 - 33 = 9 \\]\n4. **Conclusion**: Jane needs to score at least 9 points on her third test to reach the total of 42 points.\n\nThus, the minimum number of points Jane must score on her third test is 9.\n\nFINAL: 9",
+        "Both prior solutions correctly approach the problem by setting up an equation based on the total score requirement and solving for the unknown score. Let's break down the reasoning:\n\n1. **Total Score Requirement**: Jane needs a total score of at least 42 points across all three tests.\n2. **Scores from First Two Tests**: \n   - First test: 15 points\n   - Second test: 18 points\n3. **Sum of Known Scores**: \n   \\[ 15 + 18 = 33 \\]\n4. **Remaining Score Needed**: \n   \\[ 42 - 33 = 9 \\]\n\nBoth solutions correctly deduce that Jane needs to score at least 9 points on her third test to meet the requirement of a total score of at least 42 points.\n\nTherefore, the minimum number of points Jane must score on her third test is 9.\n\nFINAL: 9"
+      ],
+      [
+        "Both provided solutions correctly set up the problem and arrived at the same conclusion. Let's break it down step-by-step:\n\n1. **Total Points Requirement**: Jane needs a total of at least 42 points across all three tests.\n2. **Points Achieved So Far**: She has scored 15 points on the first test and 18 points on the second test.\n3. **Remaining Points Needed**: Calculate the remaining points needed by subtracting the points she has already scored from the total required:\n   \\[ 42 - (15 + 18) = 42 - 33 = 9 \\]\n\nBoth solutions correctly identify that Jane needs to score at least 9 points on her third test to reach the total of 42 points.\n\nThus, the minimum number of points Jane must score on her third test is 9.\n\nFINAL: 9",
+        "Both provided solutions correctly set up the problem and arrived at the same conclusion. Here\u2019s a brief breakdown of the reasoning:\n\n1. **Total Score Requirement**: Jane needs a total score of at least 42 points across all three tests.\n2. **Scores from First Two Tests**:\n   - First test: 15 points\n   - Second test: 18 points\n3. **Sum of Known Scores**:\n   \\[ 15 + 18 = 33 \\]\n4. **Remaining Score Needed**:\n   \\[ 42 - 33 = 9 \\]\n\nBoth solutions correctly deduce that Jane needs to score at least 9 points on her third test to meet the requirement of a total score of at least 42 points.\n\nTherefore, the minimum number of points Jane must score on her third test is 9.\n\nFINAL: 9"
+      ],
+      [
+        "Both provided solutions correctly set up the problem and arrived at the same conclusion. Let's break it down step-by-step:\n\n1. **Total Points Requirement**: Jane needs a total of at least 42 points across all three tests.\n2. **Points Achieved So Far**: She has scored 15 points on the first test and 18 points on the second test.\n3. **Remaining Points Needed**: Calculate the remaining points needed by subtracting the points she has already scored from the total required:\n   \\[ 42 - (15 + 18) = 42 - 33 = 9 \\]\n\nBoth solutions correctly identify that Jane needs to score at least 9 points on her third test to reach the total of 42 points.\n\nThus, the minimum number of points Jane must score on her third test is 9.\n\nFINAL: 9",
+        "Both provided solutions correctly set up the problem and arrived at the same conclusion. Let's break it down step-by-step:\n\n1. **Total Score Requirement**: Jane needs a total score of at least 42 points across all three tests.\n2. **Scores from First Two Tests**:\n   - First test: 15 points\n   - Second test: 18 points\n3. **Sum of Known Scores**:\n   \\[ 15 + 18 = 33 \\]\n4. **Remaining Score Needed**:\n   \\[ 42 - 33 = 9 \\]\n\nBoth solutions correctly deduce that Jane needs to score at least 9 points on her third test to meet the requirement of a total score of at least 42 points.\n\nTherefore, the minimum number of points Jane must score on her third test is 9.\n\nFINAL: 9"
+      ],
+      [
+        "Both provided solutions correctly set up the problem and arrived at the same conclusion. Let's break it down step-by-step:\n\n1. **Total Points Requirement**: Jane needs a total of at least 42 points across all three tests.\n2. **Points Achieved So Far**: She has scored 15 points on the first test and 18 points on the second test.\n3. **Remaining Points Needed**: Calculate the remaining points needed by subtracting the points she has already scored from the total required:\n   \\[ 42 - (15 + 18) = 42 - 33 = 9 \\]\n\nBoth solutions correctly identify that Jane needs to score at least 9 points on her third test to reach the total of 42 points.\n\nThus, the minimum number of points Jane must score on her third test is 9.\n\nFINAL: 9",
+        "Both provided solutions correctly set up the problem and arrived at the same conclusion. Let's break it down step-by-step:\n\n1. **Total Score Requirement**: Jane needs a total score of at least 42 points across all three tests.\n2. **Scores from First Two Tests**:\n   - First test: 15 points\n   - Second test: 18 points\n3. **Sum of Known Scores**:\n   \\[ 15 + 18 = 33 \\]\n4. **Remaining Score Needed**:\n   \\[ 42 - 33 = 9 \\]\n\nBoth solutions correctly deduce that Jane needs to score at least 9 points on her third test to meet the requirement of a total score of at least 42 points.\n\nTherefore, the minimum number of points Jane must score on her third test is 9.\n\nFINAL: 9"
+      ],
+      [
+        "Both provided solutions correctly set up the problem and arrived at the same conclusion. Let's break it down step-by-step:\n\n1. **Total Points Requirement**: Jane needs a total of at least 42 points across all three tests.\n2. **Points Achieved So Far**: She has scored 15 points on the first test and 18 points on the second test.\n3. **Remaining Points Needed**: Calculate the remaining points needed by subtracting the points she has already scored from the total required:\n   \\[ 42 - (15 + 18) = 42 - 33 = 9 \\]\n\nBoth solutions correctly identify that Jane needs to score at least 9 points on her third test to reach the total of 42 points.\n\nThus, the minimum number of points Jane must score on her third test is 9.\n\nFINAL: 9",
+        "Both provided solutions correctly set up the problem and arrived at the same conclusion. Let's break it down step-by-step:\n\n1. **Total Score Requirement**: Jane needs a total score of at least 42 points across all three tests.\n2. **Scores from First Two Tests**:\n   - First test: 15 points\n   - Second test: 18 points\n3. **Sum of Known Scores**:\n   \\[ 15 + 18 = 33 \\]\n4. **Remaining Score Needed**:\n   \\[ 42 - 33 = 9 \\]\n\nBoth solutions correctly deduce that Jane needs to score at least 9 points on her third test to meet the requirement of a total score of at least 42 points.\n\nTherefore, the minimum number of points Jane must score on her third test is 9.\n\nFINAL: 9"
+      ]
+    ],
+    "debate_answers": [
+      [
+        "9",
+        "9"
+      ],
+      [
+        "9",
+        "9"
+      ],
+      [
+        "9",
+        "9"
+      ],
+      [
+        "9",
+        "9"
+      ],
+      [
+        "9",
+        "9"
+      ],
+      [
+        "9",
+        "9"
+      ]
+    ],
+    "debate_correct": true,
+    "first_agreement_round": 0,
+    "unresolved": false,
+    "baseline_parse_failure": false,
+    "debate_final_parse_failure": false,
+    "debate_final_disagreement": false,
+    "wrong_agreement": false,
+    "baseline_calls": 1,
+    "debate_calls": 12,
+    "unique_model_completions": 12,
+    "generation_batches": 6,
+    "parse_failed_completions": 0,
+    "empty_completions": 0,
+    "elapsed_seconds": 113.3048718
+  },
+  {
+    "question_id": 1199,
+    "question": "Fred was preparing for a party to be held in four days.  So, he made 24 gallons of root beer on the first day and put them in the refrigerator cooler.  But later that evening, his children discovered the delicious nectar and robbed the cooler, drinking 4 of those gallons of root beer.  On the second day, his wife Barbie also discovered the root beer and accidentally spilled 7 gallons. On the third day, Fred's friend Ronnie visited Fred's house and helped himself to the root beer, further reducing the amount remaining by 5 gallons.  On the fourth day, 3 people showed up for the party.  If Fred and the others shared the remaining root beer equally, how much was available for each to drink during the party?",
+    "expected": "2",
+    "baseline_response": "To solve this problem, we need to calculate the total amount of root beer left after each event and then determine how much is left for the party.\n\n1. **First Day**: Fred made 24 gallons.\n   \\[\n   \\text{Remaining} = 24 \\text{ gallons}\n   \\]\n\n2. **Second Day**: His children drank 4 gallons.\n   \\[\n   \\text{Remaining} = 24 - 4 = 20 \\text{ gallons}\n   \\]\n\n3. **Third Day**: Barbie spilled 7 gallons.\n   \\[\n   \\text{Remaining} = 20 - 7 = 13 \\text{ gallons}\n   \\]\n\n4. **Fourth Day**: Ronnie drank 5 gallons.\n   \\[\n   \\text{Remaining} = 13 - 5 = 8 \\text{ gallons}\n   \\]\n\nOn the fourth day, 3 people showed up for the party, and the remaining root beer was shared equally among them. Therefore, the amount of root beer each person could drink is:\n\\[\n\\frac{8 \\text{ gallons}}{3 \\text{ people}} = \\frac{8}{3} \\text{ gallons per person}\n\\]\n\nFINAL: 2.6667",
+    "baseline_answer": "26667/10000",
+    "baseline_correct": false,
+    "debate_responses": [
+      [
+        "To solve this problem, we need to calculate the total amount of root beer left after each event and then determine how much is left for the party.\n\n1. **First Day**: Fred made 24 gallons.\n   \\[\n   \\text{Remaining} = 24 \\text{ gallons}\n   \\]\n\n2. **Second Day**: His children drank 4 gallons.\n   \\[\n   \\text{Remaining} = 24 - 4 = 20 \\text{ gallons}\n   \\]\n\n3. **Third Day**: Barbie spilled 7 gallons.\n   \\[\n   \\text{Remaining} = 20 - 7 = 13 \\text{ gallons}\n   \\]\n\n4. **Fourth Day**: Ronnie drank 5 gallons.\n   \\[\n   \\text{Remaining} = 13 - 5 = 8 \\text{ gallons}\n   \\]\n\nOn the fourth day, 3 people showed up for the party, and the remaining root beer was shared equally among them. Therefore, the amount of root beer each person could drink is:\n\\[\n\\frac{8 \\text{ gallons}}{3 \\text{ people}} = \\frac{8}{3} \\text{ gallons per person}\n\\]\n\nFINAL: 2.6667",
+        "To solve this problem, we will follow the sequence of events and calculate the remaining gallons of root beer step by step.\n\n1. **First Day**: Fred made 24 gallons of root beer.\n   \\[\n   \\text{Remaining gallons} = 24\n   \\]\n\n2. **Second Day**: His children drank 4 gallons.\n   \\[\n   \\text{Remaining gallons} = 24 - 4 = 20\n   \\]\n\n3. **Third Day**: Barbie accidentally spilled 7 gallons.\n   \\[\n   \\text{Remaining gallons} = 20 - 7 = 13\n   \\]\n\n4. **Fourth Day**: Ronnie helped himself to 5 gallons.\n   \\[\n   \\text{Remaining gallons} = 13 - 5 = 8\n   \\]\n\nOn the fourth day, 3 people showed up for the party, and they shared the remaining root beer equally. Therefore, the amount of root beer available for each person is:\n\\[\n\\frac{8}{3} \\approx 2.67 \\text{ gallons}\n\\]\n\nFINAL: 2.67"
+      ],
+      [
+        "Both solutions provided follow the same logical steps and arrive at the same final result. Let's break down the process again for clarity:\n\n1. **First Day**: Fred made 24 gallons of root beer.\n   \\[\n   \\text{Remaining} = 24 \\text{ gallons}\n   \\]\n\n2. **Second Day**: His children drank 4 gallons.\n   \\[\n   \\text{Remaining} = 24 - 4 = 20 \\text{ gallons}\n   \\]\n\n3. **Third Day**: Barbie spilled 7 gallons.\n   \\[\n   \\text{Remaining} = 20 - 7 = 13 \\text{ gallons}\n   \\]\n\n4. **Fourth Day**: Ronnie drank 5 gallons.\n   \\[\n   \\text{Remaining} = 13 - 5 = 8 \\text{ gallons}\n   \\]\n\nOn the fourth day, 3 people showed up for the party, and the remaining root beer was shared equally among them. Therefore, the amount of root beer each person could drink is:\n\\[\n\\frac{8 \\text{ gallons}}{3 \\text{ people}} = \\frac{8}{3} \\approx 2.6667 \\text{ gallons}\n\\]\n\nFINAL: 2.6667",
+        "Both solutions correctly outline the sequence of events and calculations leading to the final amount of root beer available for the party. The key steps are:\n\n1. Fred starts with 24 gallons.\n2. After the first day, 4 gallons are drunk by his children, leaving 20 gallons.\n3. On the second day, Barbie spills 7 gallons, leaving 13 gallons.\n4. On the third day, Ronnie drinks 5 gallons, leaving 8 gallons.\n\nFor the fourth day, when 3 people share the remaining 8 gallons equally, each person gets:\n\\[\n\\frac{8}{3} \\approx 2.67 \\text{ gallons}\n\\]\n\nThe other solver provided an additional decimal place in their final answer, but the correct value is indeed approximately 2.67 gallons.\n\nFINAL: 2.67"
+      ],
+      [
+        "Both solutions provided follow the same logical steps and arrive at the same final result. Let's break down the process again for clarity:\n\n1. **First Day**: Fred made 24 gallons of root beer.\n   \\[\n   \\text{Remaining} = 24 \\text{ gallons}\n   \\]\n\n2. **Second Day**: His children drank 4 gallons.\n   \\[\n   \\text{Remaining} = 24 - 4 = 20 \\text{ gallons}\n   \\]\n\n3. **Third Day**: Barbie spilled 7 gallons.\n   \\[\n   \\text{Remaining} = 20 - 7 = 13 \\text{ gallons}\n   \\]\n\n4. **Fourth Day**: Ronnie drank 5 gallons.\n   \\[\n   \\text{Remaining} = 13 - 5 = 8 \\text{ gallons}\n   \\]\n\nOn the fourth day, 3 people showed up for the party, and the remaining root beer was shared equally among them. Therefore, the amount of root beer each person could drink is:\n\\[\n\\frac{8 \\text{ gallons}}{3 \\text{ people}} = \\frac{8}{3} \\approx 2.6667 \\text{ gallons}\n\\]\n\nFINAL: 2.67",
+        "Both solutions correctly outline the sequence of events and calculations leading to the final amount of root beer available for the party. The key steps are:\n\n1. Fred starts with 24 gallons.\n2. After the first day, 4 gallons are drunk by his children, leaving 20 gallons.\n3. On the second day, Barbie spills 7 gallons, leaving 13 gallons.\n4. On the third day, Ronnie drinks 5 gallons, leaving 8 gallons.\n\nFor the fourth day, when 3 people share the remaining 8 gallons equally, each person gets:\n\\[\n\\frac{8}{3} \\approx 2.67 \\text{ gallons}\n\\]\n\nThe other solver provided an additional decimal place in their final answer, but the correct value is indeed approximately 2.67 gallons.\n\nFINAL: 2.67"
+      ],
+      [
+        "Both solutions provided follow the same logical steps and arrive at the same final result. Let's break down the process again for clarity:\n\n1. **First Day**: Fred made 24 gallons of root beer.\n   \\[\n   \\text{Remaining} = 24 \\text{ gallons}\n   \\]\n\n2. **Second Day**: His children drank 4 gallons.\n   \\[\n   \\text{Remaining} = 24 - 4 = 20 \\text{ gallons}\n   \\]\n\n3. **Third Day**: Barbie spilled 7 gallons.\n   \\[\n   \\text{Remaining} = 20 - 7 = 13 \\text{ gallons}\n   \\]\n\n4. **Fourth Day**: Ronnie drank 5 gallons.\n   \\[\n   \\text{Remaining} = 13 - 5 = 8 \\text{ gallons}\n   \\]\n\nOn the fourth day, 3 people showed up for the party, and the remaining root beer was shared equally among them. Therefore, the amount of root beer each person could drink is:\n\\[\n\\frac{8 \\text{ gallons}}{3 \\text{ people}} = \\frac{8}{3} \\approx 2.6667 \\text{ gallons}\n\\]\n\nFINAL: 2.67",
+        "Both solutions correctly outline the sequence of events and calculations leading to the final amount of root beer available for the party. The key steps are:\n\n1. Fred starts with 24 gallons.\n2. After the first day, 4 gallons are drunk by his children, leaving 20 gallons.\n3. On the second day, Barbie spills 7 gallons, leaving 13 gallons.\n4. On the third day, Ronnie drinks 5 gallons, leaving 8 gallons.\n\nFor the fourth day, when 3 people share the remaining 8 gallons equally, each person gets:\n\\[\n\\frac{8}{3} \\approx 2.67 \\text{ gallons}\n\\]\n\nThe other solver provided an additional decimal place in their final answer, but the correct value is indeed approximately 2.67 gallons.\n\nFINAL: 2.67"
+      ],
+      [
+        "Both solutions provided follow the same logical steps and arrive at the same final result. Let's break down the process again for clarity:\n\n1. **First Day**: Fred made 24 gallons of root beer.\n   \\[\n   \\text{Remaining} = 24 \\text{ gallons}\n   \\]\n\n2. **Second Day**: His children drank 4 gallons.\n   \\[\n   \\text{Remaining} = 24 - 4 = 20 \\text{ gallons}\n   \\]\n\n3. **Third Day**: Barbie spilled 7 gallons.\n   \\[\n   \\text{Remaining} = 20 - 7 = 13 \\text{ gallons}\n   \\]\n\n4. **Fourth Day**: Ronnie drank 5 gallons.\n   \\[\n   \\text{Remaining} = 13 - 5 = 8 \\text{ gallons}\n   \\]\n\nOn the fourth day, 3 people showed up for the party, and the remaining root beer was shared equally among them. Therefore, the amount of root beer each person could drink is:\n\\[\n\\frac{8 \\text{ gallons}}{3 \\text{ people}} = \\frac{8}{3} \\approx 2.6667 \\text{ gallons}\n\\]\n\nFINAL: 2.67",
+        "Both solutions correctly outline the sequence of events and calculations leading to the final amount of root beer available for the party. The key steps are:\n\n1. Fred starts with 24 gallons.\n2. After the first day, 4 gallons are drunk by his children, leaving 20 gallons.\n3. On the second day, Barbie spills 7 gallons, leaving 13 gallons.\n4. On the third day, Ronnie drinks 5 gallons, leaving 8 gallons.\n\nFor the fourth day, when 3 people share the remaining 8 gallons equally, each person gets:\n\\[\n\\frac{8}{3} \\approx 2.67 \\text{ gallons}\n\\]\n\nThe other solver provided an additional decimal place in their final answer, but the correct value is indeed approximately 2.67 gallons.\n\nFINAL: 2.67"
+      ],
+      [
+        "Both solutions provided follow the same logical steps and arrive at the same final result. Let's break down the process again for clarity:\n\n1. **First Day**: Fred made 24 gallons of root beer.\n   \\[\n   \\text{Remaining} = 24 \\text{ gallons}\n   \\]\n\n2. **Second Day**: His children drank 4 gallons.\n   \\[\n   \\text{Remaining} = 24 - 4 = 20 \\text{ gallons}\n   \\]\n\n3. **Third Day**: Barbie spilled 7 gallons.\n   \\[\n   \\text{Remaining} = 20 - 7 = 13 \\text{ gallons}\n   \\]\n\n4. **Fourth Day**: Ronnie drank 5 gallons.\n   \\[\n   \\text{Remaining} = 13 - 5 = 8 \\text{ gallons}\n   \\]\n\nOn the fourth day, 3 people showed up for the party, and the remaining root beer was shared equally among them. Therefore, the amount of root beer each person could drink is:\n\\[\n\\frac{8 \\text{ gallons}}{3 \\text{ people}} = \\frac{8}{3} \\approx 2.6667 \\text{ gallons}\n\\]\n\nFINAL: 2.67",
+        "Both solutions correctly outline the sequence of events and calculations leading to the final amount of root beer available for the party. The key steps are:\n\n1. Fred starts with 24 gallons.\n2. After the first day, 4 gallons are drunk by his children, leaving 20 gallons.\n3. On the second day, Barbie spills 7 gallons, leaving 13 gallons.\n4. On the third day, Ronnie drinks 5 gallons, leaving 8 gallons.\n\nFor the fourth day, when 3 people share the remaining 8 gallons equally, each person gets:\n\\[\n\\frac{8}{3} \\approx 2.67 \\text{ gallons}\n\\]\n\nThe other solver provided an additional decimal place in their final answer, but the correct value is indeed approximately 2.67 gallons.\n\nFINAL: 2.67"
+      ]
+    ],
+    "debate_answers": [
+      [
+        "26667/10000",
+        "267/100"
+      ],
+      [
+        "26667/10000",
+        "267/100"
+      ],
+      [
+        "267/100",
+        "267/100"
+      ],
+      [
+        "267/100",
+        "267/100"
+      ],
+      [
+        "267/100",
+        "267/100"
+      ],
+      [
+        "267/100",
+        "267/100"
+      ]
+    ],
+    "debate_correct": false,
+    "first_agreement_round": 2,
+    "unresolved": false,
+    "baseline_parse_failure": false,
+    "debate_final_parse_failure": false,
+    "debate_final_disagreement": false,
+    "wrong_agreement": true,
+    "baseline_calls": 1,
+    "debate_calls": 12,
+    "unique_model_completions": 12,
+    "generation_batches": 0,
+    "parse_failed_completions": 0,
+    "empty_completions": 0,
+    "elapsed_seconds": 0
+  },
+  {
+    "question_id": 376,
+    "question": "There are 40 pupils in a class. Half of the class likes blue. One-fourth of the remaining likes green and the rest likes yellow. How many pupils like the color yellow?",
+    "expected": "15",
+    "baseline_response": "To solve this problem, let's break it down step by step:\n\n1. **Total number of pupils**: 40\n\n2. **Pupils who like blue**:\n   - Half of the class likes blue.\n   - Therefore, \\( \\frac{1}{2} \\times 40 = 20 \\) pupils like blue.\n\n3. **Remaining pupils after those who like blue**:\n   - Total pupils minus those who like blue: \\( 40 - 20 = 20 \\).\n\n4. **Pupils who like green**:\n   - One-fourth of the remaining pupils like green.\n   - Therefore, \\( \\frac{1}{4} \\times 20 = 5 \\) pupils like green.\n\n5. **Pupils who like yellow**:\n   - The rest of the pupils like yellow.\n   - Therefore, \\( 20 - 5 = 15 \\) pupils like yellow.\n\nSo, the number of pupils who like the color yellow is 15.\n\nFINAL: 15",
+    "baseline_answer": "15",
+    "baseline_correct": true,
+    "debate_responses": [
+      [
+        "To solve this problem, let's break it down step by step:\n\n1. **Total number of pupils**: 40\n\n2. **Pupils who like blue**:\n   - Half of the class likes blue.\n   - Therefore, \\( \\frac{1}{2} \\times 40 = 20 \\) pupils like blue.\n\n3. **Remaining pupils after those who like blue**:\n   - Total pupils minus those who like blue: \\( 40 - 20 = 20 \\).\n\n4. **Pupils who like green**:\n   - One-fourth of the remaining pupils like green.\n   - Therefore, \\( \\frac{1}{4} \\times 20 = 5 \\) pupils like green.\n\n5. **Pupils who like yellow**:\n   - The rest of the pupils like yellow.\n   - Therefore, \\( 20 - 5 = 15 \\) pupils like yellow.\n\nSo, the number of pupils who like the color yellow is 15.\n\nFINAL: 15",
+        "To solve this problem, let's break it down step-by-step:\n\n1. **Total number of pupils**: 40\n\n2. **Pupils who like blue**:\n   - Half of the class likes blue.\n   - Therefore, \\( \\frac{1}{2} \\times 40 = 20 \\) pupils like blue.\n\n3. **Remaining pupils after those who like blue**:\n   - Total pupils minus those who like blue: \\( 40 - 20 = 20 \\).\n\n4. **Pupils who like green**:\n   - One-fourth of the remaining pupils like green.\n   - Therefore, \\( \\frac{1}{4} \\times 20 = 5 \\) pupils like green.\n\n5. **Pupils who like yellow**:\n   - The rest of the pupils like yellow.\n   - Therefore, \\( 20 - 5 = 15 \\) pupils like yellow.\n\nTo check our arithmetic:\n- Pupils who like blue: \\( 20 \\)\n- Remaining pupils: \\( 40 - 20 = 20 \\)\n- Pupils who like green: \\( \\frac{1}{4} \\times 20 = 5 \\)\n- Pupils who like yellow: \\( 20 - 5 = 15 \\)\n\nAll calculations are correct.\n\nFINAL: 15"
+      ],
+      [
+        "Both provided solutions are correct and follow a similar logical sequence to solve the problem. Let's break down the steps again for clarity:\n\n1. **Total number of pupils**: 40\n2. **Pupils who like blue**:\n   - Half of the class likes blue.\n   - Therefore, \\( \\frac{1}{2} \\times 40 = 20 \\) pupils like blue.\n3. **Remaining pupils after those who like blue**:\n   - Total pupils minus those who like blue: \\( 40 - 20 = 20 \\).\n4. **Pupils who like green**:\n   - One-fourth of the remaining pupils like green.\n   - Therefore, \\( \\frac{1}{4} \\times 20 = 5 \\) pupils like green.\n5. **Pupils who like yellow**:\n   - The rest of the pupils like yellow.\n   - Therefore, \\( 20 - 5 = 15 \\) pupils like yellow.\n\nThe final number of pupils who like the color yellow is 15.\n\nFINAL: 15",
+        "Both prior solutions provided a clear and logical breakdown of the problem. Let's verify the steps again to ensure accuracy:\n\n1. **Total number of pupils**: 40\n2. **Pupils who like blue**:\n   - Half of the class likes blue.\n   - Therefore, \\( \\frac{1}{2} \\times 40 = 20 \\) pupils like blue.\n3. **Remaining pupils after those who like blue**:\n   - Total pupils minus those who like blue: \\( 40 - 20 = 20 \\).\n4. **Pupils who like green**:\n   - One-fourth of the remaining pupils like green.\n   - Therefore, \\( \\frac{1}{4} \\times 20 = 5 \\) pupils like green.\n5. **Pupils who like yellow**:\n   - The rest of the pupils like yellow.\n   - Therefore, \\( 20 - 5 = 15 \\) pupils like yellow.\n\nThe calculations are consistent with each other and the problem statement. \n\nFINAL: 15"
+      ],
+      [
+        "Both provided solutions are correct and follow a similar logical sequence to solve the problem. Let's break down the steps again for clarity:\n\n1. **Total number of pupils**: 40\n2. **Pupils who like blue**:\n   - Half of the class likes blue.\n   - Therefore, \\( \\frac{1}{2} \\times 40 = 20 \\) pupils like blue.\n3. **Remaining pupils after those who like blue**:\n   - Total pupils minus those who like blue: \\( 40 - 20 = 20 \\).\n4. **Pupils who like green**:\n   - One-fourth of the remaining pupils like green.\n   - Therefore, \\( \\frac{1}{4} \\times 20 = 5 \\) pupils like green.\n5. **Pupils who like yellow**:\n   - The rest of the pupils like yellow.\n   - Therefore, \\( 20 - 5 = 15 \\) pupils like yellow.\n\nThe final number of pupils who like the color yellow is 15.\n\nFINAL: 15",
+        "Both provided solutions are logically sound and consistent. Let's break down the steps again for clarity:\n\n1. **Total number of pupils**: 40\n2. **Pupils who like blue**:\n   - Half of the class likes blue.\n   - Therefore, \\( \\frac{1}{2} \\times 40 = 20 \\) pupils like blue.\n3. **Remaining pupils after those who like blue**:\n   - Total pupils minus those who like blue: \\( 40 - 20 = 20 \\).\n4. **Pupils who like green**:\n   - One-fourth of the remaining pupils like green.\n   - Therefore, \\( \\frac{1}{4} \\times 20 = 5 \\) pupils like green.\n5. **Pupils who like yellow**:\n   - The rest of the pupils like yellow.\n   - Therefore, \\( 20 - 5 = 15 \\) pupils like yellow.\n\nThe final number of pupils who like the color yellow is 15.\n\nFINAL: 15"
+      ],
+      [
+        "Both provided solutions are correct and follow a similar logical sequence to solve the problem. Let's break down the steps again for clarity:\n\n1. **Total number of pupils**: 40\n2. **Pupils who like blue**:\n   - Half of the class likes blue.\n   - Therefore, \\( \\frac{1}{2} \\times 40 = 20 \\) pupils like blue.\n3. **Remaining pupils after those who like blue**:\n   - Total pupils minus those who like blue: \\( 40 - 20 = 20 \\).\n4. **Pupils who like green**:\n   - One-fourth of the remaining pupils like green.\n   - Therefore, \\( \\frac{1}{4} \\times 20 = 5 \\) pupils like green.\n5. **Pupils who like yellow**:\n   - The rest of the pupils like yellow.\n   - Therefore, \\( 20 - 5 = 15 \\) pupils like yellow.\n\nThe final number of pupils who like the color yellow is 15.\n\nFINAL: 15",
+        "Both provided solutions are logically sound and consistent. Let's break down the steps again for clarity:\n\n1. **Total number of pupils**: 40\n2. **Pupils who like blue**:\n   - Half of the class likes blue.\n   - Therefore, \\( \\frac{1}{2} \\times 40 = 20 \\) pupils like blue.\n3. **Remaining pupils after those who like blue**:\n   - Total pupils minus those who like blue: \\( 40 - 20 = 20 \\).\n4. **Pupils who like green**:\n   - One-fourth of the remaining pupils like green.\n   - Therefore, \\( \\frac{1}{4} \\times 20 = 5 \\) pupils like green.\n5. **Pupils who like yellow**:\n   - The rest of the pupils like yellow.\n   - Therefore, \\( 20 - 5 = 15 \\) pupils like yellow.\n\nThe final number of pupils who like the color yellow is 15.\n\nFINAL: 15"
+      ],
+      [
+        "Both provided solutions are correct and follow a similar logical sequence to solve the problem. Let's break down the steps again for clarity:\n\n1. **Total number of pupils**: 40\n2. **Pupils who like blue**:\n   - Half of the class likes blue.\n   - Therefore, \\( \\frac{1}{2} \\times 40 = 20 \\) pupils like blue.\n3. **Remaining pupils after those who like blue**:\n   - Total pupils minus those who like blue: \\( 40 - 20 = 20 \\).\n4. **Pupils who like green**:\n   - One-fourth of the remaining pupils like green.\n   - Therefore, \\( \\frac{1}{4} \\times 20 = 5 \\) pupils like green.\n5. **Pupils who like yellow**:\n   - The rest of the pupils like yellow.\n   - Therefore, \\( 20 - 5 = 15 \\) pupils like yellow.\n\nThe final number of pupils who like the color yellow is 15.\n\nFINAL: 15",
+        "Both provided solutions are logically sound and consistent. Let's break down the steps again for clarity:\n\n1. **Total number of pupils**: 40\n2. **Pupils who like blue**:\n   - Half of the class likes blue.\n   - Therefore, \\( \\frac{1}{2} \\times 40 = 20 \\) pupils like blue.\n3. **Remaining pupils after those who like blue**:\n   - Total pupils minus those who like blue: \\( 40 - 20 = 20 \\).\n4. **Pupils who like green**:\n   - One-fourth of the remaining pupils like green.\n   - Therefore, \\( \\frac{1}{4} \\times 20 = 5 \\) pupils like green.\n5. **Pupils who like yellow**:\n   - The rest of the pupils like yellow.\n   - Therefore, \\( 20 - 5 = 15 \\) pupils like yellow.\n\nThe final number of pupils who like the color yellow is 15.\n\nFINAL: 15"
+      ],
+      [
+        "Both provided solutions are correct and follow a similar logical sequence to solve the problem. Let's break down the steps again for clarity:\n\n1. **Total number of pupils**: 40\n2. **Pupils who like blue**:\n   - Half of the class likes blue.\n   - Therefore, \\( \\frac{1}{2} \\times 40 = 20 \\) pupils like blue.\n3. **Remaining pupils after those who like blue**:\n   - Total pupils minus those who like blue: \\( 40 - 20 = 20 \\).\n4. **Pupils who like green**:\n   - One-fourth of the remaining pupils like green.\n   - Therefore, \\( \\frac{1}{4} \\times 20 = 5 \\) pupils like green.\n5. **Pupils who like yellow**:\n   - The rest of the pupils like yellow.\n   - Therefore, \\( 20 - 5 = 15 \\) pupils like yellow.\n\nThe final number of pupils who like the color yellow is 15.\n\nFINAL: 15",
+        "Both provided solutions are logically sound and consistent. Let's break down the steps again for clarity:\n\n1. **Total number of pupils**: 40\n2. **Pupils who like blue**:\n   - Half of the class likes blue.\n   - Therefore, \\( \\frac{1}{2} \\times 40 = 20 \\) pupils like blue.\n3. **Remaining pupils after those who like blue**:\n   - Total pupils minus those who like blue: \\( 40 - 20 = 20 \\).\n4. **Pupils who like green**:\n   - One-fourth of the remaining pupils like green.\n   - Therefore, \\( \\frac{1}{4} \\times 20 = 5 \\) pupils like green.\n5. **Pupils who like yellow**:\n   - The rest of the pupils like yellow.\n   - Therefore, \\( 20 - 5 = 15 \\) pupils like yellow.\n\nThe final number of pupils who like the color yellow is 15.\n\nFINAL: 15"
+      ]
+    ],
+    "debate_answers": [
+      [
+        "15",
+        "15"
+      ],
+      [
+        "15",
+        "15"
+      ],
+      [
+        "15",
+        "15"
+      ],
+      [
+        "15",
+        "15"
+      ],
+      [
+        "15",
+        "15"
+      ],
+      [
+        "15",
+        "15"
+      ]
+    ],
+    "debate_correct": true,
+    "first_agreement_round": 0,
+    "unresolved": false,
+    "baseline_parse_failure": false,
+    "debate_final_parse_failure": false,
+    "debate_final_disagreement": false,
+    "wrong_agreement": false,
+    "baseline_calls": 1,
+    "debate_calls": 12,
+    "unique_model_completions": 12,
+    "generation_batches": 0,
+    "parse_failed_completions": 0,
+    "empty_completions": 0,
+    "elapsed_seconds": 0
+  },
+  {
+    "question_id": 390,
+    "question": "Monica is wrapping Christmas gifts. She has 6 gifts to wrap for her family, 4 gifts to wrap for her friends and 2 gifts to wrap for her teachers. She has 144 inches of ribbon and wants to make a bow for each gift with it. How many inches of ribbon can she use for each gift bow?",
+    "expected": "12",
+    "baseline_response": "To solve this problem, we need to determine how much ribbon Monica can use for each gift bow given the total amount of ribbon she has and the number of gifts she needs to wrap.\n\nFirst, let's calculate the total number of gifts:\n- Gifts for family: 6\n- Gifts for friends: 4\n- Gifts for teachers: 2\n\nTotal number of gifts = 6 + 4 + 2 = 12 gifts\n\nMonica has 144 inches of ribbon and wants to make a bow for each gift. To find out how many inches of ribbon she can use for each gift bow, we divide the total length of the ribbon by the total number of gifts:\n\n\\[ \\text{Ribbon per gift} = \\frac{\\text{Total ribbon}}{\\text{Total number of gifts}} = \\frac{144 \\text{ inches}}{12 \\text{ gifts}} \\]\n\n\\[ \\text{Ribbon per gift} = 12 \\text{ inches} \\]\n\nFINAL: 12",
+    "baseline_answer": "12",
+    "baseline_correct": true,
+    "debate_responses": [
+      [
+        "To solve this problem, we need to determine how much ribbon Monica can use for each gift bow given the total amount of ribbon she has and the number of gifts she needs to wrap.\n\nFirst, let's calculate the total number of gifts:\n- Gifts for family: 6\n- Gifts for friends: 4\n- Gifts for teachers: 2\n\nTotal number of gifts = 6 + 4 + 2 = 12 gifts\n\nMonica has 144 inches of ribbon and wants to make a bow for each gift. To find out how many inches of ribbon she can use for each gift bow, we divide the total length of the ribbon by the total number of gifts:\n\n\\[ \\text{Ribbon per gift} = \\frac{\\text{Total ribbon}}{\\text{Total number of gifts}} = \\frac{144 \\text{ inches}}{12 \\text{ gifts}} \\]\n\n\\[ \\text{Ribbon per gift} = 12 \\text{ inches} \\]\n\nFINAL: 12",
+        "To solve this problem, we need to determine how much ribbon Monica can use for each gift bow given that she has a total of 144 inches of ribbon and needs to make one bow for each of the 12 gifts (6 for family, 4 for friends, and 2 for teachers).\n\nFirst, let's calculate the total number of bows:\n- Family gifts: 6\n- Friend gifts: 4\n- Teacher gifts: 2\n\nTotal number of bows = 6 + 4 + 2 = 12\n\nNext, we need to find out how much ribbon is used per bow. We do this by dividing the total length of the ribbon by the total number of bows:\n\n\\[ \\text{Ribbon per bow} = \\frac{\\text{Total ribbon}}{\\text{Total bows}} = \\frac{144 \\text{ inches}}{12 \\text{ bows}} \\]\n\nPerforming the division:\n\n\\[ \\text{Ribbon per bow} = \\frac{144}{12} = 12 \\text{ inches} \\]\n\nSo, Monica can use 12 inches of ribbon for each gift bow.\n\nFINAL: 12"
+      ],
+      [
+        "Both prior solutions correctly approach the problem by first calculating the total number of gifts and then determining how much ribbon Monica can use per gift bow. The calculations are identical, leading to the same result.\n\nLet's break down the reasoning again for clarity:\n\n1. **Calculate Total Number of Gifts**:\n   - Family gifts: 6\n   - Friend gifts: 4\n   - Teacher gifts: 2\n   \n   Total number of gifts = 6 + 4 + 2 = 12 gifts\n\n2. **Determine Ribbon Per Gift Bow**:\n   - Total ribbon available: 144 inches\n   - Total number of gifts (bows): 12\n   \n   Ribbon per gift = \\(\\frac{144 \\text{ inches}}{12 \\text{ gifts}} = 12 \\text{ inches}\\)\n\nTherefore, Monica can use 12 inches of ribbon for each gift bow.\n\nFINAL: 12",
+        "Both prior solutions correctly calculated the amount of ribbon Monica can use for each gift bow. They both arrived at the same conclusion by following a similar process:\n\n1. Calculating the total number of gifts.\n2. Dividing the total length of the ribbon by the total number of gifts to find out how much ribbon is used per gift.\n\nLet's break down the steps again for clarity:\n\n- Total number of gifts: \\(6\\) (family) + \\(4\\) (friends) + \\(2\\) (teachers) = \\(12\\) gifts.\n- Total length of ribbon: \\(144\\) inches.\n- Ribbon per gift: \\(\\frac{144 \\text{ inches}}{12 \\text{ gifts}} = 12 \\text{ inches}\\).\n\nTherefore, Monica can use \\(12\\) inches of ribbon for each gift bow.\n\nFINAL: 12"
+      ],
+      [
+        "Both provided solutions correctly approach the problem by first calculating the total number of gifts and then determining how much ribbon Monica can use per gift bow. Let's break down the reasoning again for clarity:\n\n1. **Calculate Total Number of Gifts**:\n   - Family gifts: 6\n   - Friend gifts: 4\n   - Teacher gifts: 2\n   \n   Total number of gifts = 6 + 4 + 2 = 12 gifts\n\n2. **Determine Ribbon Per Gift Bow**:\n   - Total ribbon available: 144 inches\n   - Total number of gifts (bows): 12\n   \n   Ribbon per gift = \\(\\frac{144 \\text{ inches}}{12 \\text{ gifts}} = 12 \\text{ inches}\\)\n\nTherefore, Monica can use 12 inches of ribbon for each gift bow.\n\nFINAL: 12",
+        "Both prior solutions correctly approached the problem by first calculating the total number of gifts and then determining how much ribbon Monica can use per gift bow. Let's break down the steps again for clarity:\n\n1. **Calculate Total Number of Gifts**:\n   - Family gifts: 6\n   - Friend gifts: 4\n   - Teacher gifts: 2\n   \n   Total number of gifts = 6 + 4 + 2 = 12 gifts\n\n2. **Determine Ribbon Per Gift Bow**:\n   - Total ribbon available: 144 inches\n   - Total number of gifts (bows): 12\n   \n   Ribbon per gift = \\(\\frac{144 \\text{ inches}}{12 \\text{ gifts}} = 12 \\text{ inches}\\)\n\nTherefore, Monica can use 12 inches of ribbon for each gift bow.\n\nFINAL: 12"
+      ],
+      [
+        "Both provided solutions correctly approach the problem by first calculating the total number of gifts and then determining how much ribbon Monica can use per gift bow. Let's break down the reasoning again for clarity:\n\n1. **Calculate Total Number of Gifts**:\n   - Family gifts: 6\n   - Friend gifts: 4\n   - Teacher gifts: 2\n   \n   Total number of gifts = 6 + 4 + 2 = 12 gifts\n\n2. **Determine Ribbon Per Gift Bow**:\n   - Total ribbon available: 144 inches\n   - Total number of gifts (bows): 12\n   \n   Ribbon per gift = \\(\\frac{144 \\text{ inches}}{12 \\text{ gifts}} = 12 \\text{ inches}\\)\n\nTherefore, Monica can use 12 inches of ribbon for each gift bow.\n\nFINAL: 12",
+        "Both provided solutions correctly calculate the total number of gifts and determine the amount of ribbon Monica can use per gift bow. Let's break it down step-by-step:\n\n1. **Calculate Total Number of Gifts**:\n   - Family gifts: 6\n   - Friend gifts: 4\n   - Teacher gifts: 2\n   \n   Total number of gifts = 6 + 4 + 2 = 12 gifts\n\n2. **Determine Ribbon Per Gift Bow**:\n   - Total ribbon available: 144 inches\n   - Total number of gifts (bows): 12\n   \n   Ribbon per gift = \\(\\frac{144 \\text{ inches}}{12 \\text{ gifts}} = 12 \\text{ inches}\\)\n\nTherefore, Monica can use 12 inches of ribbon for each gift bow.\n\nFINAL: 12"
+      ],
+      [
+        "Both provided solutions correctly approach the problem by first calculating the total number of gifts and then determining how much ribbon Monica can use per gift bow. Let's break down the reasoning again for clarity:\n\n1. **Calculate Total Number of Gifts**:\n   - Family gifts: 6\n   - Friend gifts: 4\n   - Teacher gifts: 2\n   \n   Total number of gifts = 6 + 4 + 2 = 12 gifts\n\n2. **Determine Ribbon Per Gift Bow**:\n   - Total ribbon available: 144 inches\n   - Total number of gifts (bows): 12\n   \n   Ribbon per gift = \\(\\frac{144 \\text{ inches}}{12 \\text{ gifts}} = 12 \\text{ inches}\\)\n\nTherefore, Monica can use 12 inches of ribbon for each gift bow.\n\nFINAL: 12",
+        "Both provided solutions correctly calculate the total number of gifts and determine the amount of ribbon Monica can use per gift bow. Let's break it down step-by-step:\n\n1. **Calculate Total Number of Gifts**:\n   - Family gifts: 6\n   - Friend gifts: 4\n   - Teacher gifts: 2\n   \n   Total number of gifts = 6 + 4 + 2 = 12 gifts\n\n2. **Determine Ribbon Per Gift Bow**:\n   - Total ribbon available: 144 inches\n   - Total number of gifts (bows): 12\n   \n   Ribbon per gift = \\(\\frac{144 \\text{ inches}}{12 \\text{ gifts}} = 12 \\text{ inches}\\)\n\nTherefore, Monica can use 12 inches of ribbon for each gift bow.\n\nFINAL: 12"
+      ],
+      [
+        "Both provided solutions correctly approach the problem by first calculating the total number of gifts and then determining how much ribbon Monica can use per gift bow. Let's break down the reasoning again for clarity:\n\n1. **Calculate Total Number of Gifts**:\n   - Family gifts: 6\n   - Friend gifts: 4\n   - Teacher gifts: 2\n   \n   Total number of gifts = 6 + 4 + 2 = 12 gifts\n\n2. **Determine Ribbon Per Gift Bow**:\n   - Total ribbon available: 144 inches\n   - Total number of gifts (bows): 12\n   \n   Ribbon per gift = \\(\\frac{144 \\text{ inches}}{12 \\text{ gifts}} = 12 \\text{ inches}\\)\n\nTherefore, Monica can use 12 inches of ribbon for each gift bow.\n\nFINAL: 12",
+        "Both provided solutions correctly calculate the total number of gifts and determine the amount of ribbon Monica can use per gift bow. Let's break it down step-by-step:\n\n1. **Calculate Total Number of Gifts**:\n   - Family gifts: 6\n   - Friend gifts: 4\n   - Teacher gifts: 2\n   \n   Total number of gifts = 6 + 4 + 2 = 12 gifts\n\n2. **Determine Ribbon Per Gift Bow**:\n   - Total ribbon available: 144 inches\n   - Total number of gifts (bows): 12\n   \n   Ribbon per gift = \\(\\frac{144 \\text{ inches}}{12 \\text{ gifts}} = 12 \\text{ inches}\\)\n\nTherefore, Monica can use 12 inches of ribbon for each gift bow.\n\nFINAL: 12"
+      ]
+    ],
+    "debate_answers": [
+      [
+        "12",
+        "12"
+      ],
+      [
+        "12",
+        "12"
+      ],
+      [
+        "12",
+        "12"
+      ],
+      [
+        "12",
+        "12"
+      ],
+      [
+        "12",
+        "12"
+      ],
+      [
+        "12",
+        "12"
+      ]
+    ],
+    "debate_correct": true,
+    "first_agreement_round": 0,
+    "unresolved": false,
+    "baseline_parse_failure": false,
+    "debate_final_parse_failure": false,
+    "debate_final_disagreement": false,
+    "wrong_agreement": false,
+    "baseline_calls": 1,
+    "debate_calls": 12,
+    "unique_model_completions": 12,
+    "generation_batches": 0,
+    "parse_failed_completions": 0,
+    "empty_completions": 0,
+    "elapsed_seconds": 0
+  }
+]
