@@ -53,7 +53,9 @@ Replace the example exchange with your variant's logic. A synchronous variant ca
 - [Qwen2.5-3B-Instruct model card](https://huggingface.co/Qwen/Qwen2.5-3B-Instruct)
 - [GSM8K dataset card](https://huggingface.co/datasets/openai/gsm8k)
 
-The runner records actual outputs when executed. Benchmark results are pending.
+## Colab pilot results
+
+On 25 fixed GSM8K test questions, the single-agent baseline and five-round debate each scored 21/25 (84%). Debate gained 0 percentage points (exact paired McNemar p = 1.00). One baseline output reached the token cap before giving a final answer. All final debate answers parsed, and none of the 300 completions were empty. The float16 Tesla T4 run took 18 minutes 21 seconds of evaluation across 42 generation batches. See [the pilot summary](results/pilot-batch4/summary.json).
 
 ## Colab batch pilot
 
