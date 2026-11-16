@@ -1,0 +1,26 @@
+{
+  "questions": 25,
+  "mcnemar_exact": {
+    "baseline_only_correct": 1,
+    "debate_only_correct": 1,
+    "two_sided_p": 1.0
+  },
+  "baseline_accuracy_pct": 84.0,
+  "debate_accuracy_pct": 84.0,
+  "gain_percentage_points": 0.0,
+  "mean_rounds_until_first_agreement": 0.24,
+  "questions_with_any_agreement": 25,
+  "unresolved_rate_pct": 0.0,
+  "wrong_agreement_rate_pct": 16.0,
+  "baseline_calls": 25,
+  "debate_calls": 300,
+  "total_model_calls": 300,
+  "generation_batches": 42,
+  "baseline_parse_failure_rate_pct": 4.0,
+  "debate_final_parse_failure_rate_pct": 0.0,
+  "debate_final_disagreement_rate_pct": 0.0,
+  "completion_parse_failure_rate_pct": 0.3333333333333333,
+  "empty_completions": 0,
+  "evaluation_seconds": 1100.657679845,
+  "last_session_seconds": 1207.5129161329999
+}
